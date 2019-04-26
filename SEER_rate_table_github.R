@@ -5,7 +5,7 @@
 lifetable <- read.delim2(file="https://seer.cancer.gov/expsurvival/US.1970thru2015.individual.years.txt", header = FALSE)
 head(lifetable)
 
-# install.packages(tidyr)
+# install.packages("tidyr")
 library(tidyr)
 test <- tidyr::extract(lifetable, V1, c("age", "sex", "race", "year", "survival"), 
                regex="([0-9]{3})([0-9]{1})([0-9]{2})([0-9]{4})............([0-9]{7})")
@@ -48,7 +48,7 @@ lt_ss_f <- subset(lifetable, race ==9 & sex ==2); lt_ss_f <- lt_ss_f[-c(1:3)]; l
 lt_ss_m <- subset(lifetable, race ==9 & sex ==1); lt_ss_m <- lt_ss_m[-c(1:3)]; lt_ss_m <- as.matrix(lt_ss_m)    
 assign(paste("race", 9, sep=""),  transrate(lt_ss_m, lt_ss_f, yearlim=c(1970,2015), int.length=1))
 
-# install.packages(relsurv)
+# install.packages("relsurv")
 library(relsurv)
 myratetable <- joinrate(list(race1=race1, race2=race2, race3=race3, race7=race7, race9=race9), dim.name="race")
 class(myratetable)
